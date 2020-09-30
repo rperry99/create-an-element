@@ -69,16 +69,16 @@ function addEventListenerList(list, event, fn) {
 
 function updatePos(e) {
   // Put positions in variables
-  xMousePos = e.offsetX;
-  yMousePos = e.offsetY;
+  xMousePos = e.clientX;
+  yMousePos = e.clientY;
 
   // Update items within bottom left thing
   xPos.innerText = `${xMousePos}`;
   yPos.innerText = `${yMousePos}`;
 
   // Update the div
-  if (e.which === 1) {
-    e.target.parentElement.style.height = `${e.pageY - 20}px`;
+  if (e.which === 1 && e.target.id === 'grabber') {
+    e.target.parentElement.style.height = `${yMousePos - 20}px`;
     txt.innerText = `( ${e.target.parentElement.style.width}, ${e.target.parentElement.style.height} )`;
   }
 }
@@ -93,7 +93,7 @@ function clickedDiv(e) {
 }
 
 window.addEventListener('pointerdown', createDiv);
-// document.addEventListener('mousemove', updatePos);
+document.addEventListener('mousemove', updatePos);
 document.addEventListener('click', clickedEl);
 
 // container.addEventListener('mousedown', () => {
